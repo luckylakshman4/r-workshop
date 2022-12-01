@@ -2,7 +2,9 @@
 title: "plots-ggplot"
 author: "Lakshman"
 date: "2022-12-01"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -12,4 +14,29 @@ knitr::opts_chunk$set(echo = TRUE)
 # Plots with ggplot2
 
 We are going to make plots in R and it's going to be amazing.
+
+```{r}
+# library(tidyverse)
+# library(readxl)
+# library(here)
+
+# use read_csv() to read in the file
+# use here() within read_csv() to tell it where to look
+# assign the stored data an object name (we’ll store ours as ca_np)
+
+```
+
+ca_np <- read_csv(here("data", "ca_np.csv")) #to read csv file
+
+View(ca_np) to view data in separator viewing tab
+explore our data frame a bit more to see what it contains
+
+```{r}
+ca_np <- read_csv(here("data", "ca_np.csv"))
+names(ca_np) # to see the variable (column) names
+head(ca_np) # to see the first x rows (6 is the default)
+summary(ca_np) # see a quick summary of each variable
+```
+
+
 
