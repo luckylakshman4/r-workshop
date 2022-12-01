@@ -51,6 +51,61 @@ ggplot(data = ci_np, aes(x = year, y = visitors)) +
   geom_point()
 
 
+# We’re going to be doing a lot of plot variations with those same variables. 
+#Let’s store the first line as object gg_base so that we don’t need to retype it each time
+  
+gg_base <- ggplot(data = ci_np, aes(x = year, y = visitors)) # creating base
+  
+# we could change that to a scatterplot just by updating the geom_*:
+gg_base + geom_point()
+gg_base + geom_line()
+gg_base + geom_col()
+gg_base + geom_area()
+
+# customizing ggplot graphs
+
+# Some common arguments we’ll use first are:
+
+#  color = or colour =: update point or line colors
+# fill =: update fill color for objects with areas
+# linetype =: update the line type (dashed, long dash, etc.)
+# pch =: update the point style
+# size =: update the element size (e.g. of points or line thickness)
+# alpha =: update element opacity (1 = opaque, 0 = transparent)
+
+gg_base +
+  geom_line(
+    color = "purple",
+    linetype = "dashed"
+  ) # changed color to purple, linetype to dashed
+
+gg_base +   geom_point(color = "purple",
+             pch = 18,
+             size = 3,
+             alpha = 0.75)
+
+#-------- customize your own ggplot graph
+
+# Mapping variables onto aesthetics
+
+# When we want to customize a graph element based on a variable’s characteristic or value, 
+# add the argument within aes() in the appropriate geom_*() layer
+
+# scatterplot graph where the size and color of the points change based on the number of visitors
+
+
+gg_base + geom_point(
+  aes( size = visitors, color = visitors),
+  alpha = 0.5 
+) # size and colour based on no. of visitors
+
+gg_base + 
+  geom_col(aes(fill = visitors))
+
+
+
+
+
 
 
 
