@@ -160,9 +160,40 @@ gg_base +
   geom_line(color = "green")
 
 
-# Multi-series ggplot graphs
+# Multi-series ggplot graphs 
+
+ggplot(data = ca_np, aes(x = year, y = visitors)) +
+  geom_line() 
 
 
+ggplot(data = ca_np, aes(x = year, y = visitors, group = park_name)) +
+  geom_line() #splitting based on other variable
+
+ggplot(data = ca_np, aes(x = year, y = visitors, group = park_name, color = park_name)) +
+  geom_line() #splitting based on other variable
+
+
+gg_np <- ggplot(data = ca_np, aes(x = year, y = visitors, group = park_name, color = park_name))
+gg_np <- ggplot(data = ca_np, aes(x = year, y = visitors, group = park_name))
+
+#  Faceting ggplot graphs --- splitting graphs
+
+gg_np +
+  geom_line(show.legend = FALSE) +
+  theme_light() + 
+  labs(x = "year", y = "annual visitors") +
+  facet_wrap(~ park_name) #split based on park name
+
+
+# Exporting a ggplot graph with ggsave()
+
+#ggsave() will export the most recently run ggplot graph by default (plot = last_plot()), unless you give it the name of a different saved ggplot object. Some common arguments for ggsave():
+  
+# width =: set exported image width (default inches)
+# height =: set exported image height (default height)
+# dpi =: set dpi (dots per inch)
+
+ggsave(here("figures", "np_graph.jpg"), dpi = 180, width = 8, height = 7)
 
 
 
