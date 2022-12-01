@@ -160,7 +160,7 @@ gg_base +
   geom_line(color = "green")
 
 
-# Multi-series ggplot graphs 
+#Multi-series ggplot graphs 
 
 ggplot(data = ca_np, aes(x = year, y = visitors)) +
   geom_line() 
