@@ -102,6 +102,7 @@ gg_base + geom_point(
 gg_base + 
   geom_col(aes(fill = visitors))
 
+<<<<<<< HEAD
 # ggplot2 complete themes
 # built-in themes (theme_*()) that you can add to your ggplot code to make some major headway before making smaller tweaks manually
 
@@ -198,6 +199,8 @@ ggsave(here("figures", "np_graph.jpg"), dpi = 180, width = 8, height = 7)
 
 
 
+=======
+>>>>>>> 621df973e8bf58c8b9c2b30af899e152bd3ee52a
 
 
 
