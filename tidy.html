@@ -357,7 +357,293 @@ display: none;
 </div>
 
 
+<p>Here, we’ll continue by reshaping data frames (converting from
+long-to-wide, or wide-to-long format), separating and uniting variable
+(column) contents, and finding and replacing string patterns.</p>
+<p>#Tidy data</p>
+<p>“Tidy” might sound like a generic way to describe non-messy looking
+data, but it is actually a specific data structure. When data is tidy,
+it is rectangular with each variable as a column, each row an
+observation, and each cell contains a single value</p>
+<p>Use tidyr::pivot_wider() and tidyr::pivot_longer() to reshape data
+frames janitor::clean_names() to make column headers more manageable
+tidyr::unite() and tidyr::separate() to merge or separate information
+from different columns Detect or replace a string with stringr
+functions</p>
+<pre class="r"><code># Attach packages
+library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+## ✔ ggplot2 3.4.0      ✔ purrr   0.3.5 
+## ✔ tibble  3.1.8      ✔ dplyr   1.0.10
+## ✔ tidyr   1.2.1      ✔ stringr 1.4.1 
+## ✔ readr   2.1.3      ✔ forcats 0.5.2 
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(janitor)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;janitor&#39;
+## 
+## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     chisq.test, fisher.test</code></pre>
+<pre class="r"><code>library(here)</code></pre>
+<pre><code>## here() starts at D:/New folder/R/WD/r-for-excel-data/r-workshop/r-workshop</code></pre>
+<pre class="r"><code>library(readxl)</code></pre>
+<p>Use read_excel() to read in the inverts.xlsx data as an objected
+called inverts.</p>
+<pre class="r"><code>inverts &lt;- read_excel(here(&quot;data&quot;, &quot;inverts.xlsx&quot;))</code></pre>
+<p>Be sure to explore the imported data a bit:</p>
+<pre class="r"><code># View(inverts)
+names(inverts)</code></pre>
+<pre><code>## [1] &quot;month&quot;       &quot;site&quot;        &quot;common_name&quot; &quot;2016&quot;        &quot;2017&quot;       
+## [6] &quot;2018&quot;</code></pre>
+<pre class="r"><code>summary(inverts)</code></pre>
+<pre><code>##     month               site           common_name             2016       
+##  Length:55          Length:55          Length:55          Min.   :  16.0  
+##  Class :character   Class :character   Class :character   1st Qu.:  24.0  
+##  Mode  :character   Mode  :character   Mode  :character   Median : 255.0  
+##                                                           Mean   : 697.8  
+##                                                           3rd Qu.: 815.0  
+##                                                           Max.   :6384.0  
+##                                                                           
+##       2017             2018       
+##  Min.   :  16.0   Min.   :  16.0  
+##  1st Qu.:  24.0   1st Qu.:  24.0  
+##  Median :  73.0   Median : 242.5  
+##  Mean   : 658.1   Mean   : 981.3  
+##  3rd Qu.:1010.5   3rd Qu.:1389.8  
+##  Max.   :4398.0   Max.   :4955.0  
+##                   NA&#39;s   :5</code></pre>
+<div id="tidyrpivot_longer-to-reshape-from-wider-to-longer-format" class="section level1">
+<h1>tidyr::pivot_longer() to reshape from wider-to-longer format</h1>
+<div id="works-like-unpivoting" class="section level2">
+<h2>works like unpivoting</h2>
+<p>use tidyr::pivot_longer() to gather data from all years in inverts
+(columns 2016, 2017, and 2018) into two columns:</p>
+<p>one called year, which contains the year one called sp_count
+containing the number of each species observed. The new data frame will
+be stored as inverts_long:</p>
+<pre class="r"><code># Note: Either single-quotes, double-quotes, OR backticks around years work!
 
+inverts_long &lt;- pivot_longer(data = inverts, 
+                             cols = &#39;2016&#39;:&#39;2018&#39;,
+                             names_to = &quot;year&quot;,
+                             values_to = &quot;sp_count&quot;)
+inverts_long</code></pre>
+<pre><code>## # A tibble: 165 × 5
+##    month site  common_name              year  sp_count
+##    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;                    &lt;chr&gt;    &lt;dbl&gt;
+##  1 7     abur  california cone snail    2016       451
+##  2 7     abur  california cone snail    2017        28
+##  3 7     abur  california cone snail    2018       762
+##  4 7     abur  california spiny lobster 2016        17
+##  5 7     abur  california spiny lobster 2017        17
+##  6 7     abur  california spiny lobster 2018        16
+##  7 7     abur  orange cup coral         2016        24
+##  8 7     abur  orange cup coral         2017        24
+##  9 7     abur  orange cup coral         2018        24
+## 10 7     abur  purple urchin            2016        48
+## # … with 155 more rows</code></pre>
+<pre class="r"><code>class(inverts_long$year) #Explore the class of year</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>create a new column (use mutate() ) that has the same name of an
+existing column, in order to update and overwrite the existing
+column.</p>
+<p>add a column called year, which contains an as.numeric() version of
+the existing year variable</p>
+<pre class="r"><code># Coerce &quot;year&quot; class to numeric: 
+
+inverts_long &lt;- inverts_long %&gt;% 
+  mutate(year = as.numeric(year))
+
+class(inverts_long$year) # check class</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+</div>
+</div>
+<div id="tidyrpivot_wider-to-convert-from-longer-to-wider-format" class="section level1">
+<h1>tidyr::pivot_wider() to convert from longer-to-wider format</h1>
+<div id="works-like-pivot" class="section level2">
+<h2>works like pivot</h2>
+<pre class="r"><code>inverts_wide &lt;- inverts_long %&gt;% 
+  pivot_wider(names_from = common_name, 
+              values_from = sp_count)
+inverts_wide</code></pre>
+<pre><code>## # A tibble: 33 × 8
+##    month site   year `california cone snail` californi…¹ orang…² purpl…³ rock …⁴
+##    &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;                   &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+##  1 7     abur   2016                     451          17      24      48      16
+##  2 7     abur   2017                      28          17      24      48      16
+##  3 7     abur   2018                     762          16      24      48      16
+##  4 7     ahnd   2016                      27          16      24      48      16
+##  5 7     ahnd   2017                      24          16      24      48      16
+##  6 7     ahnd   2018                      24          16      24      48      16
+##  7 7     aque   2016                    4971          48    1526    1074      51
+##  8 7     aque   2017                    1752          48    1623    1354      50
+##  9 7     aque   2018                    2616          48    1859    2188      51
+## 10 7     bull   2016                    1735          24      36     715      24
+## # … with 23 more rows, and abbreviated variable names
+## #   ¹​`california spiny lobster`, ²​`orange cup coral`, ³​`purple urchin`,
+## #   ⁴​`rock scallop`</code></pre>
+</div>
+</div>
+<div id="janitorclean_names-to-clean-up-column-names" class="section level1">
+<h1>janitor::clean_names() to clean up column names</h1>
+<p>The janitor package by Sam Firke is a great collection of functions
+for some quick data cleaning, like:</p>
+<p>janitor::clean_names(): update column headers to a case of your
+choosing janitor::get_dupes(): see all rows that are duplicates within
+variables you choose janitor::remove_empty(): remove empty rows and/or
+columns janitor::adorn_*(): jazz up tables Here, we’ll use
+janitor::clean_names() to convert all of our column headers to a more
+convenient case - the default is lower_snake_case, which means all
+spaces and symbols are replaced with an underscore (or a word describing
+the symbol), all characters are lowercase, and a few other nice
+adjustments.</p>
+<p>For example, janitor::clean_names() would update these nightmare
+column names into much nicer forms:</p>
+<p>My…RECENT-income! becomes my_recent_income</p>
+<p>SAMPLE2.!test1 becomes sample2_test1</p>
+<p>ThisIsTheName becomes this_is_the_name</p>
+<p>2015 becomes x2015</p>
+<p>If we wanted to then use these columns (which we probably would,
+since we created them), we could clean the names to get them into more
+coder-friendly lower_snake_case with janitor::clean_names():</p>
+<pre class="r"><code>inverts_wide &lt;- inverts_wide %&gt;% 
+  clean_names()
+names(inverts_wide)</code></pre>
+<pre><code>## [1] &quot;month&quot;                    &quot;site&quot;                    
+## [3] &quot;year&quot;                     &quot;california_cone_snail&quot;   
+## [5] &quot;california_spiny_lobster&quot; &quot;orange_cup_coral&quot;        
+## [7] &quot;purple_urchin&quot;            &quot;rock_scallop&quot;</code></pre>
+<p>And there are other case options in clean_names(), like:</p>
+<p>“snake” produces snake_case (the default)</p>
+<p>“lower_camel” or “small_camel” produces lowerCamel</p>
+<p>“upper_camel” or “big_camel” produces UpperCamel</p>
+<p>“screaming_snake” or “all_caps” produces ALL_CAPS</p>
+<p>“lower_upper” produces lowerUPPER “upper_lower” produces
+UPPERlower</p>
+</div>
+<div id="tidyrunite-and-tidyrseparate-to-combine-or-separate-information-in-columns" class="section level1">
+<h1>tidyr::unite() and tidyr::separate() to combine or separate
+information in column(s)</h1>
+</div>
+<div id="tidyrunite-to-merge-information-from-separate-columns" class="section level1">
+<h1>tidyr::unite() to merge information from separate columns</h1>
+<p>We need to give tidyr::unite() several arguments:</p>
+<p>data: the data frame containing columns we want to combine (or pipe
+into the function from the data frame) col: the name of the new “united”
+column the columns you are uniting sep: the symbol, value or character
+to put between the united information from each column</p>
+<pre class="r"><code>inverts_unite &lt;- inverts_long %&gt;% 
+  unite(col = &quot;site_year&quot;, # What to name the new united column
+               c(site, year), # The columns we&#39;ll unite (site, year)
+               sep = &quot;_&quot;) # How to separate the things we&#39;re uniting
+inverts_unite</code></pre>
+<pre><code>## # A tibble: 165 × 4
+##    month site_year common_name              sp_count
+##    &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;                       &lt;dbl&gt;
+##  1 7     abur_2016 california cone snail         451
+##  2 7     abur_2017 california cone snail          28
+##  3 7     abur_2018 california cone snail         762
+##  4 7     abur_2016 california spiny lobster       17
+##  5 7     abur_2017 california spiny lobster       17
+##  6 7     abur_2018 california spiny lobster       16
+##  7 7     abur_2016 orange cup coral               24
+##  8 7     abur_2017 orange cup coral               24
+##  9 7     abur_2018 orange cup coral               24
+## 10 7     abur_2016 purple urchin                  48
+## # … with 155 more rows</code></pre>
+<p>Create a new object called ‘inverts_moyr,’ starting from
+inverts_long, that unites the month and year columns into a single
+column named “mo_yr,” using a slash “/” as the separator.</p>
+<pre class="r"><code>inverts_moyr &lt;- inverts_long %&gt;% 
+  unite(col = &quot;mo_yr&quot;, # What to name the new united column
+        c(month, year), # The columns we&#39;ll unite (site, year)
+        sep = &quot;/&quot;) 
+inverts_moyr</code></pre>
+<pre><code>## # A tibble: 165 × 4
+##    mo_yr  site  common_name              sp_count
+##    &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                       &lt;dbl&gt;
+##  1 7/2016 abur  california cone snail         451
+##  2 7/2017 abur  california cone snail          28
+##  3 7/2018 abur  california cone snail         762
+##  4 7/2016 abur  california spiny lobster       17
+##  5 7/2017 abur  california spiny lobster       17
+##  6 7/2018 abur  california spiny lobster       16
+##  7 7/2016 abur  orange cup coral               24
+##  8 7/2017 abur  orange cup coral               24
+##  9 7/2018 abur  orange cup coral               24
+## 10 7/2016 abur  purple urchin                  48
+## # … with 155 more rows</code></pre>
+<p>Uniting three columns</p>
+<pre class="r"><code># Uniting more than 2 columns: 
+
+inverts_triple_unite &lt;- inverts_long %&gt;% 
+  tidyr::unite(col = &quot;year_site_name&quot;,
+               c(year, site, common_name),
+               sep = &quot;-&quot;) # Note: this is a dash
+inverts_triple_unite</code></pre>
+<pre><code>## # A tibble: 165 × 3
+##    month year_site_name                     sp_count
+##    &lt;chr&gt; &lt;chr&gt;                                 &lt;dbl&gt;
+##  1 7     2016-abur-california cone snail         451
+##  2 7     2017-abur-california cone snail          28
+##  3 7     2018-abur-california cone snail         762
+##  4 7     2016-abur-california spiny lobster       17
+##  5 7     2017-abur-california spiny lobster       17
+##  6 7     2018-abur-california spiny lobster       16
+##  7 7     2016-abur-orange cup coral               24
+##  8 7     2017-abur-orange cup coral               24
+##  9 7     2018-abur-orange cup coral               24
+## 10 7     2016-abur-purple urchin                  48
+## # … with 155 more rows</code></pre>
+</div>
+<div id="tidyrseparate-to-separate-information-into-multiple-columns" class="section level1">
+<h1>tidyr::separate() to separate information into multiple columns</h1>
+<pre class="r"><code>inverts_sep &lt;- inverts_unite %&gt;% 
+  tidyr::separate(site_year, into = c(&quot;my_site&quot;, &quot;my_year&quot;))
+inverts_sep</code></pre>
+<pre><code>## # A tibble: 165 × 5
+##    month my_site my_year common_name              sp_count
+##    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;                       &lt;dbl&gt;
+##  1 7     abur    2016    california cone snail         451
+##  2 7     abur    2017    california cone snail          28
+##  3 7     abur    2018    california cone snail         762
+##  4 7     abur    2016    california spiny lobster       17
+##  5 7     abur    2017    california spiny lobster       17
+##  6 7     abur    2018    california spiny lobster       16
+##  7 7     abur    2016    orange cup coral               24
+##  8 7     abur    2017    orange cup coral               24
+##  9 7     abur    2018    orange cup coral               24
+## 10 7     abur    2016    purple urchin                  48
+## # … with 155 more rows</code></pre>
+</div>
+<div id="stringrstr_replace-to-replace-a-pattern" class="section level1">
+<h1>stringr::str_replace() to replace a pattern</h1>
+<pre class="r"><code>ca_abbr &lt;- inverts %&gt;% 
+  mutate(
+    common_name = 
+      str_replace(common_name, 
+                  pattern = &quot;california&quot;, 
+                  replacement = &quot;CA&quot;)
+  )
+ca_abbr</code></pre>
+<pre><code>## # A tibble: 55 × 6
+##    month site  common_name      `2016` `2017` `2018`
+##    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;             &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1 7     abur  CA cone snail       451     28    762
+##  2 7     abur  CA spiny lobster     17     17     16
+##  3 7     abur  orange cup coral     24     24     24
+##  4 7     abur  purple urchin        48     48     48
+##  5 7     abur  rock scallop         16     16     16
+##  6 7     ahnd  CA cone snail        27     24     24
+##  7 7     ahnd  CA spiny lobster     16     16     16
+##  8 7     ahnd  orange cup coral     24     24     24
+##  9 7     ahnd  purple urchin        48     48     48
+## 10 7     ahnd  rock scallop         16     16     16
+## # … with 45 more rows</code></pre>
+</div>
 
 
 
