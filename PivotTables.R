@@ -11,7 +11,7 @@ library(skimr) # install.packages('skimr')
 library(kableExtra) # install.packages('kableExtra')
 
 ## read in data
-lobsters <- read_xlsx(here("data/lobsters.xlsx"), skip=4)
+lobsters <- read_xlsx(here("data/lobsters2.xlsx"), skip=4)
 
 # head(lobsters) # for top 6 rows
 
@@ -110,7 +110,11 @@ ggplot(siteyear_summary, aes(x = year, y = median_size_mm, fill = site, color =s
   facet_wrap(~site)
 ggsave(here("figures", "lobsters-col.png"))
 
+# Oh no, they sent the wrong data!
+#lobsters2.xlsxis latest file, not lobsters.xlsx. Aaaaah!
 
+## read in data or update file name in the initial step, that's it
+# lobsters <- read_xlsx(here("data/lobsters2.xlsx"), skip=4)
 
 
 
