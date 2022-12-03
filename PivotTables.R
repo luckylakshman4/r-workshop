@@ -117,11 +117,49 @@ ggsave(here("figures", "lobsters-col.png"))
 # lobsters <- read_xlsx(here("data/lobsters2.xlsx"), skip=4)
 
 
+#dplyr::count()
+#Now that we’ve spent time with group_by %>% summarize, there is a shortcut if you only want to summarize by count. 
+#This is with a function called count(), and it will group_by your selected variable, count, and then also ungroup.
+
+lobsters %>%
+  count(site, year)
+
+## This is the same as:
+lobsters %>%
+  group_by(site, year) %>% 
+  summarize(n = n()) %>%
+  ungroup()
+
+View(lobsters)
 
 
+# Make new variable with mutate()
+
+# The sizes are in millimeters but let’s say it was important for them to be in meters. 
+# We can add a column with this calculation
+
+lobsters %>%
+  mutate(size_m = size_mm / 1000)
+
+# If we want to add a column that has the same value repeated, 
+# we can pass it just one value, either a number or a character string (in quotes). 
+# And let’s save this as a variable called lobsters_detailed
+
+lobsters_detailed <- lobsters %>%
+  mutate(size_m = size_mm / 1000, 
+         millenia = 2000,
+         observer = "Allison Horst")
+lobsters_detailed
 
 
+# select()
 
+# to choose, retain, and move your data by columns
+
+# to present this data finally with only columns for date, site, and size in meters
+
+lobsters_detailed %>%
+  select(date, site, size_m)
 
 
 
