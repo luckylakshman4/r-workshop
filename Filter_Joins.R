@@ -144,26 +144,16 @@ my_fish_join <- fish %>%
 my_fish_join
 
 
+# An HTML table with kable() and kableExtra
+# With any data frame, you can a nicer looking table in your knitted HTML using knitr::kable() and functions in the kableExtra package.
+# Start by using kable() with my_fish_join, and see what the default HTML table looks like in your knitted document:
+  
+kable(my_fish_join)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Simple, but quick to get a clear & useful table! Now let’s spruce it up a bit with kableExtra::kable_styling() to modify HTML table styles:
+  
+  
+  my_fish_join %>% 
+  kable() %>% 
+  kable_styling(bootstrap_options = "striped", 
+                full_width = FALSE)
