@@ -1,0 +1,49 @@
+---
+title: "Tidying"
+author: "Lakshman"
+date: "2022-12-03"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Here, we’ll continue by reshaping data frames (converting from long-to-wide, or wide-to-long format), separating and uniting variable (column) contents, and finding and replacing string patterns.
+
+#Tidy data
+
+“Tidy” might sound like a generic way to describe non-messy looking data, but it is actually a specific data structure. When data is tidy, it is rectangular with each variable as a column, each row an observation, and each cell contains a single value
+
+Use tidyr::pivot_wider() and tidyr::pivot_longer() to reshape data frames
+janitor::clean_names() to make column headers more manageable
+tidyr::unite() and tidyr::separate() to merge or separate information from different columns
+Detect or replace a string with stringr functions
+
+```{r}
+# Attach packages
+library(tidyverse)
+library(janitor)
+library(here)
+library(readxl)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
