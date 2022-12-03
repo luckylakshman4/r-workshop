@@ -1,0 +1,697 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={pivot\_lobsters},
+  pdfauthor={Lakshman},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{pivot\_lobsters}
+\author{Lakshman}
+\date{2022-12-02}
+
+\begin{document}
+\maketitle
+
+\hypertarget{pivot-tables-with-dplyr}{%
+\section{Pivot Tables with dplyr}\label{pivot-tables-with-dplyr}}
+
+create these tables using the group\_by and summarize functions from the
+dplyr package (part of the Tidyverse)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# attach libraries}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages --------------------------------------- tidyverse 1.3.2 --
+## v ggplot2 3.4.0      v purrr   0.3.5 
+## v tibble  3.1.8      v dplyr   1.0.10
+## v tidyr   1.2.1      v stringr 1.4.1 
+## v readr   2.1.3      v forcats 0.5.2 
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(readxl)}
+\FunctionTok{library}\NormalTok{(here)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## here() starts at D:/New folder/R/WD/r-for-excel-data/r-workshop/r-workshop
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(skimr) }\CommentTok{\# install.packages(\textquotesingle{}skimr\textquotesingle{})}
+\FunctionTok{library}\NormalTok{(kableExtra) }\CommentTok{\# install.packages(\textquotesingle{}kableExtra\textquotesingle{})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in !is.null(rmarkdown::metadata$output) && rmarkdown::metadata$output
+## %in% : 'length(x) = 2 > 1' in coercion to 'logical(1)'
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'kableExtra'
+## 
+## The following object is masked from 'package:dplyr':
+## 
+##     group_rows
+\end{verbatim}
+
+\hypertarget{read-in-data}{%
+\section{Read in data}\label{read-in-data}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lobsters }\OtherTok{\textless{}{-}} \FunctionTok{read\_xlsx}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"data/lobsters.xlsx"}\NormalTok{), }\AttributeTok{skip=}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+use head(lobsters) \# for top 6 rows
+
+\hypertarget{explore-data}{%
+\subsection{explore data}\label{explore-data}}
+
+skimr::skim(lobsters) \# skim lets us look more at each variable
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# skimr::skim(lobsters) \# skim lets us look more at each variable}
+\end{Highlighting}
+\end{Shaded}
+
+group\_by() \%\textgreater\% summarize() In R, we can create the
+functionality of pivot tables with the same logic: we will tell R to
+group by something and then summarize by something
+
+Take the data and then group by something and then summarize by
+something Syntax data \%\textgreater\% group\_by() \%\textgreater\%
+summarize()
+
+The pipe operator \%\textgreater\% is a really critical feature of the
+dplyr package, originally created for the magrittr package. It lets us
+chain together steps of our data wrangling, enabling us to tell a clear
+story about our entire data analysis.
+
+View(lobsters) shows up in your Console. View() (capital V) is the R
+function to view any variable in the viewer.
+
+\hypertarget{group_by-one-variable}{%
+\section{group\_by one variable}\label{group_by-one-variable}}
+
+group\_by() \%\textgreater\% summarize() with our lobsters data, just
+like we did in Excel. We will first group\_by year and then summarize by
+count, using the function n() (in the dplyr package). n() counts the
+number of times an observation shows up, and since this is uncounted
+data, this will count each row.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lobsters }\SpecialCharTok{\%\textgreater{}\%}
+\FunctionTok{group\_by}\NormalTok{(year) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{count\_by\_year=}\FunctionTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 5 x 2
+##    year count_by_year
+##   <dbl>         <int>
+## 1  2012           231
+## 2  2013           243
+## 3  2014           510
+## 4  2015          1100
+## 5  2016           809
+\end{verbatim}
+
+\hypertarget{group_by-multiple-variables}{%
+\section{group\_by multiple
+variables}\label{group_by-multiple-variables}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lobsters }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(site, year) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{count\_by\_siteyear =}  \FunctionTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'site'. You can override using the
+## `.groups` argument.
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 25 x 3
+## # Groups:   site [5]
+##    site   year count_by_siteyear
+##    <chr> <dbl>             <int>
+##  1 aque   2012                38
+##  2 aque   2013                32
+##  3 aque   2014               100
+##  4 aque   2015                83
+##  5 aque   2016                48
+##  6 carp   2012                78
+##  7 carp   2013                93
+##  8 carp   2014                79
+##  9 carp   2015                90
+## 10 carp   2016               231
+## # ... with 15 more rows
+\end{verbatim}
+
+\hypertarget{summarize-multiple-variables}{%
+\section{summarize multiple
+variables}\label{summarize-multiple-variables}}
+
+Let's also calculate the mean and standard deviation. First let's use
+the mean() function to calculate the mean. We do this within the same
+summarize() function
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lobsters }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(site, year) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{count\_by\_siteyear =}  \FunctionTok{n}\NormalTok{(),}
+            \AttributeTok{mean\_size\_mm =} \FunctionTok{mean}\NormalTok{(size\_mm)) }\CommentTok{\# by count and mean}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'site'. You can override using the
+## `.groups` argument.
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 25 x 4
+## # Groups:   site [5]
+##    site   year count_by_siteyear mean_size_mm
+##    <chr> <dbl>             <int>        <dbl>
+##  1 aque   2012                38         71  
+##  2 aque   2013                32         72.1
+##  3 aque   2014               100         76.9
+##  4 aque   2015                83         68.5
+##  5 aque   2016                48         68.7
+##  6 carp   2012                78         74.4
+##  7 carp   2013                93         76.6
+##  8 carp   2014                79         NA  
+##  9 carp   2015                90         70.7
+## 10 carp   2016               231         68.9
+## # ... with 15 more rows
+\end{verbatim}
+
+NA because one or more values in that year are NA. pass an argument
+na.rm=TRUE that says to remove NAs first before calculating the average.
+Then Calculate the standard deviation with the sd() function
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lobsters }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(site, year) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{count\_by\_siteyear =}  \FunctionTok{n}\NormalTok{(), }
+            \AttributeTok{mean\_size\_mm =} \FunctionTok{mean}\NormalTok{(size\_mm, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{), }\CommentTok{\#na.rm to remove NA}
+            \AttributeTok{sd\_size\_mm =} \FunctionTok{sd}\NormalTok{(size\_mm, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{)) }\CommentTok{\#summarise by count, mean, sd}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'site'. You can override using the
+## `.groups` argument.
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 25 x 5
+## # Groups:   site [5]
+##    site   year count_by_siteyear mean_size_mm sd_size_mm
+##    <chr> <dbl>             <int>        <dbl>      <dbl>
+##  1 aque   2012                38         71        10.2 
+##  2 aque   2013                32         72.1      12.3 
+##  3 aque   2014               100         76.9       9.32
+##  4 aque   2015                83         68.5      12.6 
+##  5 aque   2016                48         68.7      12.5 
+##  6 carp   2012                78         74.4      14.6 
+##  7 carp   2013                93         76.6       8.71
+##  8 carp   2014                79         79.1       8.57
+##  9 carp   2015                90         70.7      14.6 
+## 10 carp   2016               231         68.9      12.5 
+## # ... with 15 more rows
+\end{verbatim}
+
+Now we are at the point where we actually want to save this summary
+information as a variable so we can use it in further analyses and
+formatting.
+
+So let's add a variable assignment to that first line:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{siteyear\_summary }\OtherTok{\textless{}{-}}\NormalTok{ lobsters }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(site, year) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{count\_by\_siteyear =}  \FunctionTok{n}\NormalTok{(), }
+            \AttributeTok{mean\_size\_mm =} \FunctionTok{mean}\NormalTok{(size\_mm, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{), }\CommentTok{\#na.rm to remove NA}
+            \AttributeTok{sd\_size\_mm =} \FunctionTok{sd}\NormalTok{(size\_mm, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{)) }\CommentTok{\#summarise by count, mean, sd}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'site'. You can override using the
+## `.groups` argument.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{siteyear\_summary }\CommentTok{\#inspect our new variable}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 25 x 5
+## # Groups:   site [5]
+##    site   year count_by_siteyear mean_size_mm sd_size_mm
+##    <chr> <dbl>             <int>        <dbl>      <dbl>
+##  1 aque   2012                38         71        10.2 
+##  2 aque   2013                32         72.1      12.3 
+##  3 aque   2014               100         76.9       9.32
+##  4 aque   2015                83         68.5      12.6 
+##  5 aque   2016                48         68.7      12.5 
+##  6 carp   2012                78         74.4      14.6 
+##  7 carp   2013                93         76.6       8.71
+##  8 carp   2014                79         79.1       8.57
+##  9 carp   2015                90         70.7      14.6 
+## 10 carp   2016               231         68.9      12.5 
+## # ... with 15 more rows
+\end{verbatim}
+
+\hypertarget{table-formatting-with-kable}{%
+\section{Table formatting with
+kable()}\label{table-formatting-with-kable}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# make a table with our new variable}
+\NormalTok{siteyear\_summary }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{kable}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}{l|r|r|r|r}
+\hline
+site & year & count\_by\_siteyear & mean\_size\_mm & sd\_size\_mm\\
+\hline
+aque & 2012 & 38 & 71.00000 & 10.150223\\
+\hline
+aque & 2013 & 32 & 72.12500 & 12.262584\\
+\hline
+aque & 2014 & 100 & 76.92000 & 9.321074\\
+\hline
+aque & 2015 & 83 & 68.45783 & 12.555536\\
+\hline
+aque & 2016 & 48 & 68.68750 & 12.510687\\
+\hline
+carp & 2012 & 78 & 74.35897 & 14.616282\\
+\hline
+carp & 2013 & 93 & 76.56989 & 8.709562\\
+\hline
+carp & 2014 & 79 & 79.08974 & 8.569329\\
+\hline
+carp & 2015 & 90 & 70.65556 & 14.646517\\
+\hline
+carp & 2016 & 231 & 68.90476 & 12.470122\\
+\hline
+ivee & 2012 & 26 & 66.07692 & 12.092719\\
+\hline
+ivee & 2013 & 40 & 73.77500 & 7.640941\\
+\hline
+ivee & 2014 & 132 & 76.02273 & 17.860984\\
+\hline
+ivee & 2015 & 361 & 69.80332 & 17.470534\\
+\hline
+ivee & 2016 & 193 & 71.61658 & 13.450454\\
+\hline
+mohk & 2012 & 83 & 77.25301 & 10.587433\\
+\hline
+mohk & 2013 & 15 & 71.86667 & 10.190098\\
+\hline
+mohk & 2014 & 36 & 75.75000 & 10.038142\\
+\hline
+mohk & 2015 & 296 & 59.19932 & 16.770357\\
+\hline
+mohk & 2016 & 210 & 63.01286 & 11.875763\\
+\hline
+napl & 2012 & 6 & 73.00000 & 11.747340\\
+\hline
+napl & 2013 & 63 & 75.31746 & 12.989854\\
+\hline
+napl & 2014 & 163 & 79.51572 & 9.556531\\
+\hline
+napl & 2015 & 270 & 78.24074 & 12.438899\\
+\hline
+napl & 2016 & 127 & 74.39370 & 10.732060\\
+\hline
+\end{tabular}
+
+include median
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{siteyear\_summary }\OtherTok{\textless{}{-}}\NormalTok{ lobsters }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(site, year) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{count\_by\_siteyear =}  \FunctionTok{n}\NormalTok{(), }
+            \AttributeTok{mean\_size\_mm =} \FunctionTok{mean}\NormalTok{(size\_mm, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }
+            \AttributeTok{sd\_size\_mm =} \FunctionTok{sd}\NormalTok{(size\_mm, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }
+            \AttributeTok{median\_size\_mm =} \FunctionTok{median}\NormalTok{(size\_mm, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'site'. You can override using the
+## `.groups` argument.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{siteyear\_summary}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 25 x 6
+## # Groups:   site [5]
+##    site   year count_by_siteyear mean_size_mm sd_size_mm median_size_mm
+##    <chr> <dbl>             <int>        <dbl>      <dbl>          <dbl>
+##  1 aque   2012                38         71        10.2            70  
+##  2 aque   2013                32         72.1      12.3            75  
+##  3 aque   2014               100         76.9       9.32           75.5
+##  4 aque   2015                83         68.5      12.6            70  
+##  5 aque   2016                48         68.7      12.5            71  
+##  6 carp   2012                78         74.4      14.6            74.5
+##  7 carp   2013                93         76.6       8.71           76  
+##  8 carp   2014                79         79.1       8.57           79  
+##  9 carp   2015                90         70.7      14.6            70  
+## 10 carp   2016               231         68.9      12.5            70  
+## # ... with 15 more rows
+\end{verbatim}
+
+ggplot function
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# a ggplot option:}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ siteyear\_summary, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ year, }\AttributeTok{y =}\NormalTok{ median\_size\_mm, }\AttributeTok{color =}\NormalTok{ site)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{pivot_lobsters_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggsave}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"figures"}\NormalTok{, }\StringTok{"lobsters{-}line.png"}\NormalTok{)) }\CommentTok{\# save image}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# another option:}
+\FunctionTok{ggplot}\NormalTok{(siteyear\_summary, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ year, }\AttributeTok{y =}\NormalTok{ median\_size\_mm, }\AttributeTok{fill =}\NormalTok{ site, }\AttributeTok{color =}\NormalTok{site)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{site)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{pivot_lobsters_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggsave}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"figures"}\NormalTok{, }\StringTok{"lobsters{-}col.png"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+\end{verbatim}
+
+\#dplyr::count()
+
+Now that we've spent time with group\_by \%\textgreater\% summarize,
+there is a shortcut if you only want to summarize by count. This is with
+a function called count(), and it will group\_by your selected variable,
+count, and then also ungroup.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lobsters }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(site, year)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 25 x 3
+##    site   year     n
+##    <chr> <dbl> <int>
+##  1 aque   2012    38
+##  2 aque   2013    32
+##  3 aque   2014   100
+##  4 aque   2015    83
+##  5 aque   2016    48
+##  6 carp   2012    78
+##  7 carp   2013    93
+##  8 carp   2014    79
+##  9 carp   2015    90
+## 10 carp   2016   231
+## # ... with 15 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# This is the same as:}
+\NormalTok{lobsters }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(site, year) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'site'. You can override using the
+## `.groups` argument.
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 25 x 3
+##    site   year     n
+##    <chr> <dbl> <int>
+##  1 aque   2012    38
+##  2 aque   2013    32
+##  3 aque   2014   100
+##  4 aque   2015    83
+##  5 aque   2016    48
+##  6 carp   2012    78
+##  7 carp   2013    93
+##  8 carp   2014    79
+##  9 carp   2015    90
+## 10 carp   2016   231
+## # ... with 15 more rows
+\end{verbatim}
+
+\hypertarget{make-new-variable-with-mutate}{%
+\section{Make new variable with
+mutate()}\label{make-new-variable-with-mutate}}
+
+The sizes are in millimeters but let's say it was important for them to
+be in meters. We can add a column with this calculation
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lobsters }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{size\_m =}\NormalTok{ size\_mm }\SpecialCharTok{/} \DecValTok{1000}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,893 x 8
+##     year month date    site  transect replicate size_mm size_m
+##    <dbl> <dbl> <chr>   <chr>    <dbl> <chr>       <dbl>  <dbl>
+##  1  2012     8 8/20/12 ivee         3 A              70  0.07 
+##  2  2012     8 8/20/12 ivee         3 B              60  0.06 
+##  3  2012     8 8/20/12 ivee         3 B              65  0.065
+##  4  2012     8 8/20/12 ivee         3 B              70  0.07 
+##  5  2012     8 8/20/12 ivee         3 B              85  0.085
+##  6  2012     8 8/20/12 ivee         3 C              60  0.06 
+##  7  2012     8 8/20/12 ivee         3 C              65  0.065
+##  8  2012     8 8/20/12 ivee         3 C              67  0.067
+##  9  2012     8 8/20/12 ivee         3 D              70  0.07 
+## 10  2012     8 8/20/12 ivee         4 B              85  0.085
+## # ... with 2,883 more rows
+\end{verbatim}
+
+If we want to add a column that has the same value repeated, we can pass
+it just one value, either a number or a character string (in quotes).
+And let's save this as a variable called lobsters\_detailed
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lobsters\_detailed }\OtherTok{\textless{}{-}}\NormalTok{ lobsters }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{size\_m =}\NormalTok{ size\_mm }\SpecialCharTok{/} \DecValTok{1000}\NormalTok{, }
+         \AttributeTok{millenia =} \DecValTok{2000}\NormalTok{,}
+         \AttributeTok{observer =} \StringTok{"Allison Horst"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{select}{%
+\section{select()}\label{select}}
+
+To choose, retain, and move your data by columns To present this data
+finally with only columns for date, site, and size in meters
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lobsters\_detailed }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(date, site, size\_m)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2,893 x 3
+##    date    site  size_m
+##    <chr>   <chr>  <dbl>
+##  1 8/20/12 ivee   0.07 
+##  2 8/20/12 ivee   0.06 
+##  3 8/20/12 ivee   0.065
+##  4 8/20/12 ivee   0.07 
+##  5 8/20/12 ivee   0.085
+##  6 8/20/12 ivee   0.06 
+##  7 8/20/12 ivee   0.065
+##  8 8/20/12 ivee   0.067
+##  9 8/20/12 ivee   0.07 
+## 10 8/20/12 ivee   0.085
+## # ... with 2,883 more rows
+\end{verbatim}
+
+\end{document}

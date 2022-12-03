@@ -2,7 +2,10 @@
 title: "pivot_lobsters"
 author: "Lakshman"
 date: "2022-12-02"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}
