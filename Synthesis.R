@@ -1,0 +1,83 @@
+
+library(tidyverse)
+library(here)  
+library(janitor) 
+library(paletteer) # install.packages("paletteer")
+
+# Read in the noaa_landings.csv data as object us_landings, 
+# adding argument na = "no data" to automatically reassign any “no data” entries to NA during import
+
+us_landings <- read_csv(here("data","noaa_landings.csv"),
+                        na = "no data")
+View(us_landings)
+
+# Explore data
+
+summary(us_landings)
+View(us_landings)
+names(us_landings)
+head(us_landings)
+tail(us_landings)
+
+# get all column names into lowercase_snake_case
+
+salmon_clean <- us_landings %>% 
+  clean_names()
+
+
+# Convert everything to lower case with mutate() + (str_to_lower())
+# Remove dollar signs in value column (mutate() + parse_number())
+# Keep only observations that include “salmon” (filter() + str_detect())
+# Separate “salmon” from any additional refined information on species (separate())
+
+
+salmon_clean <- us_landings %>% 
+  clean_names() %>% # Make column headers snake_case
+  mutate(
+    afs_name = str_to_lower(afs_name)
+  ) %>% # Converts character columns to lowercase
+  mutate(dollars_num = parse_number(dollars_usd)) %>% # Just keep numbers from $ column
+  filter(str_detect(afs_name, pattern = "salmon")) %>% # Only keep entries w/"salmon"
+  separate(afs_name, into = c("group", "subgroup"), sep = ", ") %>% # Note comma-space
+  drop_na(dollars_num) # Drop (listwise deletion) any observations with NA for dollars_num
+
+
+# Find total annual US value ($) for each salmon subgroup
+# find annual values by subgroup
+
+salmon_us_annual <- salmon_clean %>% 
+  group_by(year, subgroup) %>% 
+  summarize(
+    tot_value = sum(dollars_num, na.rm = TRUE),
+  )
+
+
+# Make a graph of US commercial fisheries value by species over time with ggplot2
+
+salmon_gg <- 
+  ggplot(salmon_us_annual, 
+         aes(x = year, y = tot_value, group = subgroup)) +
+  geom_line(aes(color = subgroup)) +
+  theme_bw() +
+  labs(x = "year", y = "US commercial salmon value (USD)")
+salmon_gg
+
+
+# Built-in color palettes
+
+scale_color_paletteer_d("package_name::palette_name")
+
+salmon_gg <- 
+  ggplot(salmon_us_annual, 
+         aes(x = year, y = tot_value, group = subgroup)) +
+  geom_line(aes(color = subgroup)) +
+  theme_bw() +
+  labs(x = "year", y = "US commercial salmon value (USD)") +
+  scale_color_paletteer_d("colorblindr::OkabeIto")
+salmon_gg
+
+
+
+
+
+
